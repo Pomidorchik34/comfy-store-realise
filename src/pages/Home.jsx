@@ -1,8 +1,9 @@
 import { data } from "autoprefixer";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Home() {
+  let navigate = useNavigate();
   const [products, setProducts] = useState({ data: [] });
   useEffect(() => {
     fetch("https://strapi-store-server.onrender.com/api/products?featured=true")
@@ -11,6 +12,11 @@ function Home() {
       .catch((err) => console.log(err));
     console.log(products);
   }, []);
+  function onClicked(event) {
+    console.log(event.target.id);
+    localStorage.setItem("id", event.target.id);
+    navigate("/products/details");
+  }
   return (
     <>
       <div className="container-home mx-24 py-20 flex justify-between">
@@ -78,18 +84,27 @@ function Home() {
       <div className="pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3 mx-24 p-20">
         {products.data.map((value, index) => {
           return (
-            <Link key={index} className="card flex items-center gap-4">
+            <div
+              onClick={onClicked}
+              key={value.id}
+              id={value.id}
+              className="card flex items-center gap-4"
+            >
               <img
+                id={value.id}
                 src={value.attributes.image}
                 alt=""
                 className="rounded-xl h-64 mt-4 md:h-48 object-cover"
               />
 
-              <h2 className="card-title capitalize tracking-wider pt-4">
+              <h2
+                id={value.id}
+                className="card-title capitalize tracking-wider pt-4"
+              >
                 {value.attributes.title}
               </h2>
-              <span>{value.attributes.price / 100 + "$"}</span>
-            </Link>
+              <span id={value.id}>{value.attributes.price / 100 + "$"}</span>
+            </div>
           );
         })}
       </div>

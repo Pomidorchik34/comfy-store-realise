@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Product.css";
 function Products() {
   const [products, setProducts] = useState({ data: [] });
@@ -32,9 +32,16 @@ function Products() {
     });
     setFilteredData(copied);
   }
+  let navigate = useNavigate();
+  let cards = useRef([]);
+  function onClicked(event) {
+    console.log(event.target.id);
+    localStorage.setItem("id", event.target.id);
+    navigate("/products/details");
+  }
   return (
     <>
-      <div className="root flex justify-center items-center mt-20 flex-col">
+      <div className="container root flex justify-center items-center mt-20 flex-col">
         <div className="container-filter mx-24 flex flex-wrap items-center justify-center p-10">
           <form action="" className="">
             <label>
@@ -109,39 +116,61 @@ function Products() {
             </div>
           </div>
         </div>
-        <div className="cards">
+        <div className="cards" ref={cards}>
           {!filteredData.length &&
             products.data.map((value, index) => {
               return (
-                <Link key={index} className="card flex items-center gap-4">
+                <div
+                  onClick={onClicked}
+                  key={value.id}
+                  id={value.id}
+                  className="card flex items-center gap-4"
+                >
                   <img
+                    id={value.id}
                     src={value.attributes.image}
                     alt=""
                     className="rounded-xl h-64 mt-4 md:h-48 object-cover"
                   />
 
-                  <h2 className="card-title capitalize tracking-wider pt-4">
+                  <h2
+                    id={value.id}
+                    className="card-title capitalize tracking-wider pt-4"
+                  >
                     {value.attributes.title}
                   </h2>
-                  <span>{value.attributes.price / 100 + "$"}</span>
-                </Link>
+                  <span id={value.id}>
+                    {value.attributes.price / 100 + "$"}
+                  </span>
+                </div>
               );
             })}
           {filteredData &&
             filteredData.map((value, index) => {
               return (
-                <Link key={index} className="card flex items-center gap-4">
+                <div
+                  onClick={onClicked}
+                  key={value.id}
+                  id={value.id}
+                  className="card flex items-center gap-4"
+                >
                   <img
+                    id={value.id}
                     src={value.attributes.image}
                     alt=""
                     className="rounded-xl h-64 mt-4 md:h-48 object-cover"
                   />
 
-                  <h2 className="card-title capitalize tracking-wider pt-4">
+                  <h2
+                    id={value.id}
+                    className="card-title capitalize tracking-wider pt-4"
+                  >
                     {value.attributes.title}
                   </h2>
-                  <span>{value.attributes.price / 100 + "$"}</span>
-                </Link>
+                  <span id={value.id}>
+                    {value.attributes.price / 100 + "$"}
+                  </span>
+                </div>
               );
             })}
         </div>

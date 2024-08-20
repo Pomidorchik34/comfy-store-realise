@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import About from "./pages/About";
 import MainLayout from "./layouts/mainLayout";
+import Details from "./pages/Details";
 import { createContext, useEffect, useState } from "react";
 
 export const TokenContext = createContext("");
@@ -83,6 +84,14 @@ function App() {
               </>
             )}
             <Route path="*" element={<Error />}></Route>
+            <Route
+              path="/products/details"
+              element={
+                <MainLayout>
+                  <Details></Details>
+                </MainLayout>
+              }
+            ></Route>
           </Routes>
         </TokenContext.Provider>
       </USerContext.Provider>
