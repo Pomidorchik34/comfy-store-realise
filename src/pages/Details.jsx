@@ -23,17 +23,19 @@ function Details() {
   }, [product]);
   let amount = useRef("");
   function ToLocalStorage(event) {
+    notify;
     let cart = [];
-
     if (localStorage.getItem("cart")) {
       cart = JSON.parse(localStorage.getItem("cart"));
       cart.push({
+        id: id,
         product: product,
         amount: amount.current.value,
       });
       localStorage.setItem("cart", JSON.stringify(cart));
     } else {
       cart.push({
+        id: id,
         product: product,
         amount: amount.current.value,
       });
@@ -95,7 +97,7 @@ function Details() {
             </select>
           </div>
           <button
-            onClick={(ToLocalStorage, notify)}
+            onClick={ToLocalStorage}
             className="btn btn-secondary btn-md mt-8"
           >
             ADD TO BAG
