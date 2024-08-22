@@ -40,6 +40,7 @@ function Cart() {
                     {value.product.company}
                   </h4>
                 </div>
+
                 <div className="sm:ml-12">
                   <div className="form-control max-w-xs">
                     <label for="amount" className="label p-0">
