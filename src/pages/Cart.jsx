@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 function Cart() {
   const [cart, setCart] = useState([]);
   const [product, setProduct] = useState([]);
+
   const [price, setPrice] = useState(0);
   useEffect(() => {
     if (localStorage.getItem("cart")) {
