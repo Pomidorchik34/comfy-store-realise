@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Error from "./pages/Error";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
-import Orders from "./pages/Error";
+import Oreders from "./pages/Oreders";
 import Products from "./pages/Product";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -77,7 +77,7 @@ function App() {
                   path="/orders"
                   element={
                     <MainLayout>
-                      <Orders />
+                      <Oreders />
                     </MainLayout>
                   }
                 ></Route>
